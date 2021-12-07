@@ -8,12 +8,13 @@ export const productsContext = React.createContext();
 const INIT_STATE = {
   products: [],
   oneProduct: null,
+  productsTotalCount: 0
 };
 
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case CASE_GET_PRODUCTS:
-      return { ...state, products: action.payload.data };
+      return { ...state, products: action.payload.data, productsTotalCount: action.payload.headers["x-total-count"] };
     case CASE_GET_ONE_PRODUCT:
       return { ...state, oneProduct: action.payload.data };
     default:
@@ -30,7 +31,7 @@ const ProductsContextProvider = ({ children }) => {
   }
 
   async function getProducts() {
-    let result = await axios.get(PRODUCTS_API);
+    let result = await axios.get(`${PRODUCTS_API}${window.location.search}`);
     dispatch({
       type: CASE_GET_PRODUCTS,
       payload: result,
@@ -60,6 +61,7 @@ const ProductsContextProvider = ({ children }) => {
       value={{
         products: state.products,
         oneProduct: state.oneProduct,
+        productsTotalCount: state.productsTotalCount,
         getProducts,
         getOneProduct,
         deleteProduct,
