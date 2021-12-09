@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useAuth } from "../../contexts/authContext";
+import { cartContext } from "../../contexts/cartContext";
 
 import "./Header.css";
 
@@ -14,6 +15,10 @@ const Header = () => {
     handleLogout,
     user: { email },
   } = useAuth();
+  const { getCart, cartLength } = useContext(cartContext);
+  useEffect(() => {
+    getCart();
+  }, []);
   const NAV_ITEMS = [
     {
       title: "BRANDS A-Z",
@@ -70,11 +75,13 @@ const Header = () => {
           />
         </Link>
         <div>
-          <Badge count={5}>
-            <ShoppingCartOutlined
-              style={{ fontSize: "30px", cursor: "pointer" }}
-            />
-          </Badge>
+          <Link to="/cart">
+            <Badge count={+cartLength}>
+              <ShoppingCartOutlined
+                style={{ fontSize: "30px", cursor: "pointer" }}
+              />
+            </Badge>
+          </Link>
         </div>
       </div>
       <div className="navbar">
@@ -90,6 +97,18 @@ const Header = () => {
             {item.title}
           </Link>
         ))}
+        {email === "maira@gmail.com" ? (
+          <Link
+            className={
+              location.pathname === "/admin"
+                ? "navbar__item-active"
+                : "navbar__item"
+            }
+            to="/admin"
+          >
+            ADMIN
+          </Link>
+        ) : null}
       </div>
     </>
   );

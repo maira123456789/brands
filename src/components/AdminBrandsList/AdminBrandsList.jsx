@@ -16,7 +16,7 @@ const AdminBrandsList = () => {
         <List.Item actions={[<a key="list-loadmore-edit" onClick={()=> deleteBrand(item.id)}>Delete</a>]}>
           <List.Item.Meta
             avatar={<Avatar src={item.logo} />}
-            title={<a href="https://ant.design">{item.brand}</a>}
+            title={<a href="">{item.brand}</a>}
           />
         </List.Item>
       )}

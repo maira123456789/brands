@@ -17,7 +17,7 @@ const DetailsProduct = () => {
   }, [oneProduct]);
   return (
     <div className="container" style={{marginTop:"20px"}}>
-      {product ? (
+      {product ? ( // проверка стоит если он есть отображаем страницу детального просмотра если нет ЛОАДИНГ
           <>
         <div style={{display:"flex", justifyContent:"space-between", alignItems:"center",marginBottom:"20px"}}>
           <div style={{ width: "35vw" , border:"1px solid black"}}>

@@ -12,21 +12,35 @@ import Routing from "./Routing";
 
 import "antd/dist/antd.css";
 import "./App.css";
+import CartContextProvider from "./contexts/cartContext";
 
 const App = () => {
   return (
     <AuthContextProvider>
-      <BrandsContextProvider>
-        <ProductsContextProvider>
-          <BrowserRouter>
-            <Header />
-            <Routing />
-            <Footer />
-          </BrowserRouter>
-        </ProductsContextProvider>
-      </BrandsContextProvider>
+      <CartContextProvider>
+        <BrandsContextProvider>
+          <ProductsContextProvider>
+            <BrowserRouter>
+              <Header />
+              <Routing />
+              <Footer />
+            </BrowserRouter>
+          </ProductsContextProvider>
+        </BrandsContextProvider>
+      </CartContextProvider>
     </AuthContextProvider>
   );
 };
 
 export default App;
+
+
+/*
+CRUD
+фильтрация
+пагинация
+поиск 
+корзина
+роутинг
+админка
+*/
